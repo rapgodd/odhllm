@@ -40,7 +40,7 @@ jobs:
         run: docker build -t odhllm .
 
       - name: Docker 이미지에 tag 붙이기
-        run: docker tag cicdtest ${{ steps.login-ecr.outputs.registry }}/odhllm:latest
+        run: docker tag odhllm ${{ steps.login-ecr.outputs.registry }}/odhllm:latest
 
       - name: ECR에 Docker 이미지 push
         run: docker push ${{ steps.login-ecr.outputs.registry }}/odhllm:latest
