@@ -1,7 +1,7 @@
-package com.giyeon.odhllm.signUp.controller;
+package com.giyeon.odhllm.account.controller;
 
-import com.giyeon.odhllm.signUp.domain.SignUpDto;
-import com.giyeon.odhllm.signUp.service.SignUpService;
+import com.giyeon.odhllm.account.domain.SignUpDto;
+import com.giyeon.odhllm.account.service.SignUpService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;

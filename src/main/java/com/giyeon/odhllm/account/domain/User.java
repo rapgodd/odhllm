@@ -1,10 +1,11 @@
-package com.giyeon.odhllm.signUp.domain;
+package com.giyeon.odhllm.account.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity
+@Table(name = "users")
 @Getter
 public class User {
 
@@ -17,8 +18,8 @@ public class User {
     private String email;
     private String password;
 
-    public void hashPassword(User user, PasswordEncoder passwordEncoder){
-        this.password = passwordEncoder.encode(user.getPassword());
+    public void hashPassword(PasswordEncoder passwordEncoder){
+        this.password = passwordEncoder.encode(this.getPassword());
     }
 
     public void fillInform(SignUpDto signUpDto){
