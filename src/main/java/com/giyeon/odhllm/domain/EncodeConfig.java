@@ -1,6 +1,5 @@
-package com.giyeon.odhllm.account;
+package com.giyeon.odhllm.domain;
 
-import com.giyeon.odhllm.account.service.DataEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

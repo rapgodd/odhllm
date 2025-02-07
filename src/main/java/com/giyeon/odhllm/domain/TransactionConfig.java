@@ -1,4 +1,4 @@
-package com.giyeon.odhllm.account;
+package com.giyeon.odhllm.domain;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +8,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 @Configuration
 public class TransactionConfig {
+
     @Bean
     public PlatformTransactionManager transactionManager() {
         return new JpaTransactionManager();

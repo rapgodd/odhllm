@@ -1,7 +1,6 @@
-package com.giyeon.odhllm.account;
+package com.giyeon.odhllm.domain;
 
-import com.giyeon.odhllm.account.domain.User;
-import com.giyeon.odhllm.account.service.DataEncoder;
+import com.giyeon.odhllm.domain.account.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

@@ -1,4 +1,4 @@
-package com.giyeon.odhllm.account.domain;
+package com.giyeon.odhllm.domain.account.dto;
 
 import lombok.Data;
 

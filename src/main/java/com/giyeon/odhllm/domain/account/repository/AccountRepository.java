@@ -1,7 +1,7 @@
-package com.giyeon.odhllm.account.repository;
+package com.giyeon.odhllm.domain.account.repository;
 
-import com.giyeon.odhllm.account.domain.User;
-import com.giyeon.odhllm.account.service.AccountManaging;
+import com.giyeon.odhllm.domain.account.repository.Interface.AccountManaging;
+import com.giyeon.odhllm.domain.account.domain.User;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -14,8 +14,8 @@ public class AccountRepository implements AccountManaging {
     private final EntityManager em;
     private final TransactionTemplate tcTemplate;
 
-
-    public void save(User account){
+    @Override
+    public void create(User account){
         tcTemplate.execute(status -> {
             em.persist(account);
             return null;

@@ -1,8 +1,8 @@
 package com.giyeon.odhllm;
 
-import com.giyeon.odhllm.account.domain.SignUpDto;
-import com.giyeon.odhllm.account.domain.User;
-import com.giyeon.odhllm.account.service.DataEncoder;
+import com.giyeon.odhllm.domain.account.dto.SignUpDto;
+import com.giyeon.odhllm.domain.account.domain.User;
+import com.giyeon.odhllm.domain.DataEncoder;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

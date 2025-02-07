@@ -1,4 +1,4 @@
-package com.giyeon.odhllm.account.exception.custom;
+package com.giyeon.odhllm.domain.account.exception.custom;
 
 public class EmptyUserInformException extends RuntimeException {
 

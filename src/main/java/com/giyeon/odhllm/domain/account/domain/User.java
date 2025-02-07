@@ -1,14 +1,20 @@
-package com.giyeon.odhllm.account.domain;
+package com.giyeon.odhllm.domain.account.domain;
 
-import com.giyeon.odhllm.account.exception.custom.EmptyUserInformException;
+import com.giyeon.odhllm.domain.account.dto.SignUpDto;
+import com.giyeon.odhllm.domain.account.exception.custom.EmptyUserInformException;
 import jakarta.persistence.*;
 import lombok.Getter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 @Getter
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,8 +22,15 @@ public class User {
     private Long id;
 
     private String nickName;
+
     private String email;
+
     private String password;
+
+    private String refreshToken;
+
+    @Enumerated(EnumType.STRING)
+    private Role userRole;
 
     public void hashPassword(PasswordEncoder passwordEncoder){
         this.password = passwordEncoder.encode(this.getPassword());
@@ -29,10 +42,15 @@ public class User {
             this.nickName = signUpDto.getNickname();
             this.password = signUpDto.getPassword();
             this.email = signUpDto.getEmail();
+            this.userRole = Role.ROLE_UNSUBSCRIBED;
         }else{
             throw new EmptyUserInformException(checkNull(signUpDto)+" 공란은 허용이 되지 않습니다.");
         }
 
+    }
+
+    public void updateRefreshToken(String refreshToken){
+        this.refreshToken = refreshToken;
     }
 
     public String checkNull(SignUpDto signUpDto){
@@ -48,4 +66,13 @@ public class User {
     }
 
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getUsername() {
+        return this.nickName;
+    }
 }
