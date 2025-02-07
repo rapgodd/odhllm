@@ -12,11 +12,11 @@ import org.springframework.transaction.support.TransactionTemplate;
 public class AccountRepository implements AccountManaging {
 
     private final EntityManager em;
-    private final TransactionTemplate tmTemplate;
+    private final TransactionTemplate tcTemplate;
 
 
     public void save(User account){
-        tmTemplate.execute(status -> {
+        tcTemplate.execute(status -> {
             em.persist(account);
             return null;
         });

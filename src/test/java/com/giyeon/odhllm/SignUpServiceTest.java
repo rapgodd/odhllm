@@ -24,6 +24,57 @@ public class SignUpServiceTest {
 
     }
 
+    @Test
+    void notFillNicknameErrorTest() {
+
+        //given
+        SignUpDto userInform = new SignUpDto(null, "test", "test");
+        User user = new User();
+
+
+        //then
+        try{
+            user.fillInform(userInform);
+        }catch (Exception e){
+            Assertions.assertThat(e.getMessage()).isEqualTo("닉네임 공란은 허용이 되지 않습니다.");
+        }
+
+    }
+
+    @Test
+    void notFillEmailErrorTest() {
+
+        //given
+        SignUpDto userInform = new SignUpDto("test", null, "test");
+        User user = new User();
+
+
+        //then
+        try{
+            user.fillInform(userInform);
+        }catch (Exception e){
+            Assertions.assertThat(e.getMessage()).isEqualTo("이메일 공란은 허용이 되지 않습니다.");
+        }
+
+    }
+
+    @Test
+    void notFillPasswordErrorTest() {
+
+        //given
+        SignUpDto userInform = new SignUpDto("test", "test", null);
+        User user = new User();
+
+
+        //then
+        try{
+            user.fillInform(userInform);
+        }catch (Exception e){
+            Assertions.assertThat(e.getMessage()).isEqualTo("비밀번호 공란은 허용이 되지 않습니다.");
+        }
+
+    }
+
 
     private static DataEncoder dataEncoder = user -> {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
