@@ -77,7 +77,7 @@ public class LoginService implements Authenticate{
 
         User user = (User) authenticate.getPrincipal();
         user.updateRefreshToken(authToken.getRefreshToken());
-        System.out.println("리프레시토큰:"+authToken.getRefreshToken());
+        System.out.println("엑세스토큰:"+authToken.getAccessToken());
 
         return authToken;
     }
