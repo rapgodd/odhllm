@@ -56,4 +56,5 @@ jobs:
             docker stop odhllm || true
             docker rm odhllm || true
             docker pull ${{ steps.login-ecr.outputs.registry }}/odhllm:latest
+            cd ~/odhllm
             docker compose up --build -d
