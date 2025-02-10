@@ -56,4 +56,5 @@ jobs:
             docker compose down || true
             docker rm odhllm || true
             docker pull ${{ steps.login-ecr.outputs.registry }}/odhllm:latest
-            docker compose -f /home/ubuntu/odhllm/docker-compose.yml up --build -d
+            export REGISTRY=${{ steps.login-ecr.outputs.registry }}
+            docker compose up -d
