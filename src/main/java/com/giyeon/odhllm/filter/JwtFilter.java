@@ -35,8 +35,9 @@ public class JwtFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
 
         String header  = request.getHeader("Authorization");
-        
-        
+
+        //
+
         extractToken(header).ifPresentOrElse(token -> {
             byte[] secretBytes = JWT_SECRET_KEY.getBytes(StandardCharsets.UTF_8);
 

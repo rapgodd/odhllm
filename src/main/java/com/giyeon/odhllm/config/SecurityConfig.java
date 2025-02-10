@@ -24,8 +24,10 @@ public class SecurityConfig {
             "/login",
             "/images/**",
             "/favicon.ico",
-            "/refresh"
+            "/refresh",
+            "/main"
     };
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {

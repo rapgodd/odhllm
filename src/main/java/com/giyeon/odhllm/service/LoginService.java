@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 import static com.giyeon.odhllm.service.util.JwtUtil.*;
 
