@@ -21,7 +21,7 @@
 
 | 프론트/백엔드                                            | 기획/디자인                                          |
 |:--------------------------------------------------------:|:---------------------------------------------------:|
-| <img src="src/main/resources/static/images/giyeon.png" width="500" /> | <img src="src/main/resources/static/images/yunji.png" width="500" /> |
+| <img src="src/main/resources/static/images/giyeon.png" width="500" /> | <img src="src/main/resources/static/images/yunji.png" width="500" /> |
 | **충북대학교 경영정보/국제경영**                          | **홍익대학교 디자인**                               |
 ---
 
