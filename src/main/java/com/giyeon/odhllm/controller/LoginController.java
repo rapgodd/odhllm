@@ -25,6 +25,17 @@ public class LoginController {
         model.addAttribute("refreshToken", authTokenDto.getRefreshToken());
 
         return "home";
+    }
+
+    @PostMapping("/refresh")
+    public String refresh(@RequestBody AuthTokenDto refreshToken, Model model){
+
+        AuthTokenDto authTokenDto = loginService.reset(refreshToken.getRefreshToken());
+        model.addAttribute("accessToken", authTokenDto.getAccessToken());
+        model.addAttribute("refreshToken", authTokenDto.getRefreshToken());
+        System.out.println(model);
+
+        return "home";
 
     }
 

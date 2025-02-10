@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import java.util.Optional;
+
 @Repository
 @RequiredArgsConstructor
 public class AccountRepository implements AccountManaging {
@@ -22,5 +24,9 @@ public class AccountRepository implements AccountManaging {
         });
     }
 
-
+    public Optional<User> areTokensEqual(String refreshToken) {
+        return em.createQuery("select u from User u where u.refreshToken = :refreshToken", User.class)
+                .setParameter("refreshToken", refreshToken).
+                        getResultList().stream().findAny();
+    }
 }

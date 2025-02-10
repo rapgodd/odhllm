@@ -3,9 +3,9 @@ package com.giyeon.odhllm.service;
 import com.giyeon.odhllm.domain.User;
 import com.giyeon.odhllm.domain.dto.AuthTokenDto;
 import com.giyeon.odhllm.domain.dto.LoginRequestDto;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
+import com.giyeon.odhllm.exception.custom.FilterException;
+import com.giyeon.odhllm.exception.custom.WrongRefreshToken;
+import com.giyeon.odhllm.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,14 +17,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
+import static com.giyeon.odhllm.service.util.JwtUtil.*;
 
 @Service
 @RequiredArgsConstructor
 public class LoginService{
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
+    private final AccountRepository accountRepository;
 
     private static final Long ACCESS_TOKEN_EXPIRATION_TIME = 1000 * 60 * 30L;
     private static final Long REFRESH_TOKEN_EXPIRATION_TIME = 1000 * 60 * 60 * 24 * 30L;
@@ -46,32 +49,7 @@ public class LoginService{
                 .toList();
 
         byte[] bytes = JWT_SECRET_KEY.getBytes(StandardCharsets.UTF_8);
-
-        //엑세스 토큰 생성
-        String accessToken = Jwts.builder()
-                    // subject = 토큰 제목으로 주로 식별자를 사용하기 때문에 email로 지정
-                    .setSubject(email)
-                    // clain = 내용으로 권한을 삽입했습니다.
-                    .claim("role", roles)
-                    // 발급 시간
-                    .setIssuedAt(new Date(System.currentTimeMillis()))
-                    // 만료 시간
-                    .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_EXPIRATION_TIME))
-                    .signWith(Keys.hmacShaKeyFor(bytes), SignatureAlgorithm.HS512)
-                    .compact();
-
-        String refreshToken = Jwts.builder()
-                    .setSubject(email)
-                    .setIssuedAt(new Date(System.currentTimeMillis()))
-                    .setExpiration(new Date(System.currentTimeMillis() + REFRESH_TOKEN_EXPIRATION_TIME))
-                    .signWith(Keys.hmacShaKeyFor(bytes), SignatureAlgorithm.HS512)
-                    .compact();
-
-        AuthTokenDto authToken = AuthTokenDto.builder()
-                                    .grantType("Bearer")
-                                    .accessToken(accessToken)
-                                    .refreshToken(refreshToken)
-                                    .build();
+        AuthTokenDto authToken = createAuthDto(email, roles, bytes);
 
         User user = (User) authenticate.getPrincipal();
         user.updateRefreshToken(authToken.getRefreshToken());
@@ -84,4 +62,30 @@ public class LoginService{
     public void setKey(String key){
         JWT_SECRET_KEY = key;
     }
+
+    @Transactional
+    public AuthTokenDto reset(String refreshToken) {
+
+        User user = accountRepository.areTokensEqual(refreshToken)
+                .orElseThrow(()->new WrongRefreshToken("존재하지 않는 리프레시 토큰입니다."));
+
+        AuthTokenDto authDto = createAuthDto(user.getEmail(),
+                                    List.of(String.valueOf(user.getUserRole())),
+                                    JWT_SECRET_KEY.getBytes(StandardCharsets.UTF_8));
+
+        user.updateRefreshToken(authDto.getRefreshToken());
+
+        System.out.println(authDto);
+        return authDto;
+
+    }
+
+    private AuthTokenDto createAuthDto(String email, List<String> roles, byte[] bytes) {
+        return AuthTokenDto.builder()
+                .grantType("Bearer")
+                .accessToken(createAccessToken(email, roles, bytes,ACCESS_TOKEN_EXPIRATION_TIME))
+                .refreshToken(createRefreshToken(email, bytes, REFRESH_TOKEN_EXPIRATION_TIME))
+                .build();
+    }
+
 }

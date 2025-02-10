@@ -24,6 +24,7 @@ public class SecurityConfig {
             "/login",
             "/images/**",
             "/favicon.ico",
+            "/refresh"
     };
 
     @Bean

@@ -2,6 +2,7 @@ package com.giyeon.odhllm.filter;
 
 import com.giyeon.odhllm.config.SecurityConfig;
 import com.giyeon.odhllm.exception.custom.FilterException;
+import com.giyeon.odhllm.service.util.JwtUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -39,7 +40,7 @@ public class JwtFilter extends OncePerRequestFilter {
         extractToken(header).ifPresentOrElse(token -> {
             byte[] secretBytes = JWT_SECRET_KEY.getBytes(StandardCharsets.UTF_8);
 
-            Claims claims = getHandledClaim(token, secretBytes);
+            Claims claims = JwtUtil.getHandledClaim(token, secretBytes);
             createSession(claims);
 
             System.out.println("JWT 인증 통과");
@@ -47,7 +48,6 @@ public class JwtFilter extends OncePerRequestFilter {
         }, () -> {
             throw new FilterException("JWT 토큰이 존재하지 않습니다.");
         });
-
 
     }
 
@@ -84,25 +84,6 @@ public class JwtFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(auth);
     }
 
-    private Claims getHandledClaim(String token, byte[] secretBytes) {
-        Claims claims;
-        try {
-            claims = extract(token, secretBytes);
-        }catch (Exception e){
-            throw new FilterException("JWT 토큰 검증과정에서 오류가 발생했습니다.");
-        }
-        return claims;
-    }
-
-    private Claims extract(String token, byte[] secretBytes) {
-        Claims claims;
-        claims = Jwts.parserBuilder()
-               .setSigningKey(Keys.hmacShaKeyFor(secretBytes))
-               .build()
-               .parseClaimsJws(token)
-               .getBody();
-        return claims;
-    }
 
     private Optional<String> extractToken(String token) {
         if(StringUtils.hasText(token)&& token.startsWith("Bearer")){
