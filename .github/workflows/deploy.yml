@@ -56,5 +56,5 @@ jobs:
             docker pull ${{ steps.login-ecr.outputs.registry }}/odhllm:latest
             export REGISTRY=${{ steps.login-ecr.outputs.registry }}
             cd /home/ubuntu/odhllm
-            docker compose down || true
+            docker compose down --rmi all || true
             docker compose up -d
