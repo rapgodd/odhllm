@@ -25,7 +25,8 @@ public class SecurityConfig {
             "/images/**",
             "/favicon.ico",
             "/refresh",
-            "/main"
+            "/main",
+            "/mail/code",
     };
 
 

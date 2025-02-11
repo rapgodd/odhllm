@@ -1,6 +1,8 @@
 services:
   odhllm:
-    image: ${REGISTRY}/odhllm:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - 8080:8080
     depends_on:
@@ -15,8 +17,6 @@ services:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
       retries: 10
-    volumes:
-      - /home/ubuntu/redis:/data
 
 
 
