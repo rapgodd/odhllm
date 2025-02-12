@@ -5,10 +5,7 @@ import com.giyeon.odhllm.service.SignUpService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,11 +20,9 @@ public class SignUpController {
         return "home";
     }
 
-    @GetMapping("/email")
-    public String validateEmail(@RequestParam String email, Model model){
-        String result = signUpService.validateEmail(email);
-        model.addAttribute("message", result);
-        return "home";
+    @GetMapping("/signUp")
+    public String goSignUpPage(){
+        return "signup";
     }
 
 

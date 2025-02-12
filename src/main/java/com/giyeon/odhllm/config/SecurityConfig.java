@@ -28,6 +28,8 @@ public class SecurityConfig {
             "/main",
             "/mail/code",
             "/email/**",
+            "/css/**",
+            "/js/**",
     };
 
 
