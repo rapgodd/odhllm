@@ -27,10 +27,11 @@ public class SecurityConfig {
             "/refresh",
             "/main",
             "/mail/code",
+            "/user/email/**",
             "/email/**",
             "/css/**",
             "/js/**",
-            "/"
+            "/",
     };
 
 
