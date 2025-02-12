@@ -27,6 +27,7 @@ public class SecurityConfig {
             "/refresh",
             "/main",
             "/mail/code",
+            "/email/**",
     };
 
 
