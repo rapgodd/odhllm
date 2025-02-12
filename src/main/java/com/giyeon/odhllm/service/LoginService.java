@@ -3,9 +3,9 @@ package com.giyeon.odhllm.service;
 import com.giyeon.odhllm.domain.User;
 import com.giyeon.odhllm.domain.dto.AuthTokenDto;
 import com.giyeon.odhllm.domain.dto.LoginRequestDto;
-import com.giyeon.odhllm.exception.custom.FilterException;
 import com.giyeon.odhllm.exception.custom.WrongRefreshToken;
-import com.giyeon.odhllm.repository.AccountRepository;
+import com.giyeon.odhllm.repository.CreationRepository;
+import com.giyeon.odhllm.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,7 +26,8 @@ import static com.giyeon.odhllm.service.util.JwtUtil.*;
 public class LoginService{
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
-    private final AccountRepository accountRepository;
+    private final CreationRepository creationRepository;
+    private final UserRepository userRepository;
 
     private static final Long ACCESS_TOKEN_EXPIRATION_TIME = 1000 * 60 * 30L;
     private static final Long REFRESH_TOKEN_EXPIRATION_TIME = 1000 * 60 * 60 * 24 * 30L;
@@ -65,7 +66,7 @@ public class LoginService{
     @Transactional
     public AuthTokenDto reset(String refreshToken) {
 
-        User user = accountRepository.areTokensEqual(refreshToken)
+        User user = userRepository.areTokensEqual(refreshToken)
                 .orElseThrow(()->new WrongRefreshToken("존재하지 않는 리프레시 토큰입니다."));
 
         AuthTokenDto authDto = createAuthDto(user.getEmail(),
