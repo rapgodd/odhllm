@@ -30,6 +30,7 @@ public class SecurityConfig {
             "/email/**",
             "/css/**",
             "/js/**",
+            "/"
     };
 
 
