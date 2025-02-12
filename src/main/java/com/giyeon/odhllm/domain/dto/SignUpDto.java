@@ -1,8 +1,10 @@
 package com.giyeon.odhllm.domain.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class SignUpDto {
     public String nickname;
     public String email;

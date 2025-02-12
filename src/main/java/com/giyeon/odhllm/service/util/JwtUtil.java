@@ -9,7 +9,11 @@ import io.jsonwebtoken.security.Keys;
 import java.util.Date;
 import java.util.List;
 
-public class JwtUtil {
+public final class JwtUtil {
+
+    private JwtUtil() {
+
+    }
 
     public static String createAccessToken(String email, List<String> roles, byte[] bytes, Long ACCESS_TOKEN_EXPIRATION_TIME) {
         return Jwts.builder()

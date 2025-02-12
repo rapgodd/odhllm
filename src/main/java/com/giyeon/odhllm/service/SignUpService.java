@@ -20,15 +20,23 @@ public class SignUpService {
         accountCreationTemplate.createAccount(userInform, dataEncoder, creation);
     }
 
-    public String validateEmail(String email) {
-        if(email.contains("@") && email.contains(".")) {
-            if(userRepository.findByEmail(email).isEmpty()){
-                return "사용 가능한 이메일입니다.";
-            }else{
-                return "이미 사용중인 이메일입니다.";
-            }
-        }else{
-            return "이메일 형식이 올바르지 않습니다.";
+    public String validateEmail(String givenEmail) {
+        if(checkEmailFormat(givenEmail)) {
+            return isUnique(givenEmail);
         }
+
+        return "이메일 형식이 올바르지 않습니다.";
+    }
+
+    private String isUnique(String givenEmail) {
+        if(userRepository.findByEmail(givenEmail).isEmpty()){
+            return "사용 가능한 이메일입니다.";
+        }else{
+            return "이미 사용중인 이메일입니다.";
+        }
+    }
+
+    private boolean checkEmailFormat(String givenEmail) {
+        return givenEmail.contains("@") && givenEmail.contains(".");
     }
 }
