@@ -1,7 +1,5 @@
 package com.giyeon.odhllm.controller;
 
-import com.giyeon.odhllm.domain.dto.AuthTokenDto;
-import com.giyeon.odhllm.domain.dto.LoginRequestDto;
 import com.giyeon.odhllm.domain.dto.MailVerificationDto;
 import com.giyeon.odhllm.service.EmailSender;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +19,6 @@ public class EmailController {
 
         String notification = emailSender.send(mail);
         model.addAttribute("notification", notification);
-
         return "home";
     }
 

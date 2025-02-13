@@ -3,10 +3,6 @@ package com.giyeon.odhllm.service;
 import com.giyeon.odhllm.domain.dto.MailVerificationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.List;
 import java.util.Random;
 
 @Service
@@ -25,7 +20,6 @@ public class SimpleMailService implements EmailSender {
     private String sender;
     private final JavaMailSender javaMailSender;
     private final RedisTemplate<String, Object> redisTemplate;
-
 
 
     @Override
@@ -59,6 +53,8 @@ public class SimpleMailService implements EmailSender {
             throw new RuntimeException();
         }
     }
+
+
 
 
 
