@@ -5,4 +5,5 @@ import com.giyeon.odhllm.domain.dto.ResponseMessageDto;
 
 public interface Tcp {
     ResponseMessageDto send(MessageDto message);
+
 }
