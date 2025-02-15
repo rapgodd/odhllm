@@ -23,6 +23,7 @@ public class Chat {
     @Nullable
     private Long sender;
 
+    @Lob
     private String message;
 
 

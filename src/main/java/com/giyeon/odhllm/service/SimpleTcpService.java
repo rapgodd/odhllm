@@ -19,7 +19,7 @@ import java.util.List;
 public class SimpleTcpService implements Tcp {
 
     @Value("${fast-server.ip}")
-    private String fastServerIp;
+    private String FAST_SERVER_IP;
     private final MessageEmRepository messageEmRepository;
 
     @Override
@@ -30,7 +30,8 @@ public class SimpleTcpService implements Tcp {
         System.out.println("도착1"+"\n");
         RestTemplate http = new RestTemplate();
         System.out.println("도착2"+"\n");
-        ResponseMessageDto llmResponse = http.postForObject(fastServerIp, message, ResponseMessageDto.class);
+        String url = "http://" + "3.38.84.121" + "/llm";
+        ResponseMessageDto llmResponse = http.postForObject(url, message, ResponseMessageDto.class);
         System.out.println("도착3"+"\n");
 
         //chat 엔티티 생성

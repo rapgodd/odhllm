@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- 기존 CSS 불러오기 -->
-  <link rel="stylesheet" href="css/signupStyle.css" />
-  <link rel="stylesheet" href="css/signupVars.css" />
+  <link rel="stylesheet" th:href="@{/css/signupStyle.css}" />
+  <link rel="stylesheet" th:href="@{/css/signupVars.css}" />
 
   <style>
 
@@ -121,11 +121,22 @@
   <div class="div4">비밀번호</div>
   <div class="rectangle-136"></div>
   <!-- 비밀번호 input -->
+  <div class="div4">비밀번호</div>
+  <div class="rectangle-136"></div>
+  <!-- 비밀번호 input -->
   <input
           type="password"
           id="passwordInput"
-          style="position: absolute; left: 550px; top: 350px; /* 예시 위치 */
-             width: 200px; height: 40px; background: transparent; outline: none; color:white;"
+          style="
+    position: absolute;
+    left: 550px;
+    top: 350px;
+    width: 200px;
+    height: 40px;
+    background: transparent;
+    outline: none;
+    color: black; /* 입력 시 검은색 동그라미로 보이도록 */
+  "
   />
 
   <div class="div5">비밀번호 확인</div>
@@ -151,7 +162,7 @@
           style="position: absolute; left: 600px; top: 455px; width: 200px;"
   ></div>
 
-  <img class="_5" src="png/_50.png" />
+  <img class="_5" th:src="@{/png/_50.png}" />
 
   <!-- 계정만들기 버튼 -->
   <button class="frame-90"
@@ -159,7 +170,7 @@
           disabled
           style="position: absolute; left: 870px; top: 680px; width: 200px; height: 40px;"
   >
-    <img class="creating-an-account-1" src="png/creating-an-account-10.png" />
+    <img class="creating-an-account-1" th:src="@{/png/creating-an-account-10.png}" />
   </button>
 
   <!-- 닉네임 중복확인 버튼 -->
@@ -167,7 +178,7 @@
           id="nicknameCheckBtn"
           style="position: absolute; left: 1220px; top: 230px; width: 100px; height: 40px;"
   >
-    <img class="check-redundancy-1" src="png/check-redundancy-10.png" />
+    <img class="check-redundancy-1" th:src="@{/png/check-redundancy-10.png}" />
   </button>
 
   <!-- 이메일 중복확인 버튼 -->
@@ -175,7 +186,7 @@
           id="emailCheckBtn"
           style="position: absolute; left: 1220px; top: 335px; width: 100px; height: 40px;"
   >
-    <img class="check-redundancy-2" src="png/check-redundancy-20.png" />
+    <img class="check-redundancy-2" th:src="@{/png/check-redundancy-20.png}" />
   </button>
 
   <!-- ★ 닉네임/이메일 중복확인 결과 표시 영역 -->

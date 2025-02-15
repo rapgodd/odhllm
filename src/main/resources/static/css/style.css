@@ -53,6 +53,16 @@
   left: 0px;
   top: 0px;
 }
+hr.line-1 {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #1D2A4C;
+  border: none;
+  margin: 10px 0;
+  position: relative;
+  z-index: 1;
+}
 .new {
   color: #ffffff;
   text-align: left;

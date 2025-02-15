@@ -9,6 +9,12 @@ import io.jsonwebtoken.security.Keys;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * ==Deprecated==
+ *
+ * JWT -> Session 인증 방식으로 이동
+ */
+
 public final class JwtUtil {
 
     private JwtUtil() {

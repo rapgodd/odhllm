@@ -4,17 +4,14 @@ import com.giyeon.odhllm.domain.dto.SignUpDto;
 import com.giyeon.odhllm.exception.custom.EmptyUserInformException;
 import jakarta.persistence.*;
 import lombok.Getter;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
 @Getter
-public class User implements UserDetails {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,13 +63,4 @@ public class User implements UserDetails {
     }
 
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
-    }
-
-    @Override
-    public String getUsername() {
-        return this.nickName;
-    }
 }
