@@ -46,9 +46,15 @@ public class User {
 
     }
 
+    /**
+     * ==Deprecated==
+     * 세션인증으로 구조 변경으로 인해
+     * 사용되지 않는 메소드
+     */
     public void updateRefreshToken(String refreshToken){
         this.refreshToken = refreshToken;
     }
+
 
     public String checkNull(SignUpDto signUpDto){
         if(signUpDto.getNickname() == null){
@@ -61,6 +67,8 @@ public class User {
             return null;
         }
     }
+
+
 
 
 }

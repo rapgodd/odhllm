@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface Message {
     boolean saveAll(List<Chat> chat);
+
 }

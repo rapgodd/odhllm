@@ -288,14 +288,14 @@
     outline: none;
     left: -2px;
     top: -5px;
-    color: #ffffff; /* 원하는 컬러 */
+    color: #ffffff;
 
 }
 .form-control:focus::placeholder {
   color: transparent;
 }
 .form-control::placeholder {
-  color: #ffffff; /* 원하는 컬러 */
+  color: #ffffff;
 }
 .form-control-pw{
   position: absolute;
@@ -312,7 +312,7 @@
   color: transparent;
 }
 .form-control-pw::placeholder {
-  color: #ffffff; /* 원하는 컬러 */
+  color: #ffffff;
 }
 .div6 {
   color: #ffffff;

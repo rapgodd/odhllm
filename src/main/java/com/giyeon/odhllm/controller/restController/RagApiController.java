@@ -24,7 +24,4 @@ public class RagApiController {
         return null;
     }
 
-//    @PostMapping("/chat")
-//    public ResponseEntity<ResponseDto<?>> create
-
 }

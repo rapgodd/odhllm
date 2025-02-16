@@ -135,6 +135,9 @@ hr.line-1 {
   left: 223px;
   top: 516.33px;
 }
+.frame-80:hover {
+  background-color: #a3a0dc;
+}
 .try-now {
   color: #ffffff;
   text-align: left;

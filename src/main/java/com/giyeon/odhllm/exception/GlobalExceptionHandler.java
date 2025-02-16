@@ -23,4 +23,11 @@ public class GlobalExceptionHandler {
         return "login";
     }
 
+    @ExceptionHandler(RuntimeException.class)
+    public String handleRuntimeException(RuntimeException e, Model model) {
+        model.addAttribute("status", 404);
+        model.addAttribute("message", e.getMessage());
+        return "home";
+    }
+
 }

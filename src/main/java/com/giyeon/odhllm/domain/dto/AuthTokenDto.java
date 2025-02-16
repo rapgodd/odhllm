@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthTokenDto {
-    private String grantType;
-    private String accessToken;
-    private String refreshToken;
     private Long userId;
     private boolean existedUser;
+    private String email;
+    private String nickname;
+
 }

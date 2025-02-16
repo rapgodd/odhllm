@@ -19,7 +19,7 @@ public class EmailController {
 
         String notification = emailSender.send(mail);
         model.addAttribute("notification", notification);
-        return "home";
+        return "index";
     }
 
 

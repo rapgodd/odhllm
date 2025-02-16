@@ -30,7 +30,7 @@ public class SimpleTcpService implements Tcp {
         System.out.println("도착1"+"\n");
         RestTemplate http = new RestTemplate();
         System.out.println("도착2"+"\n");
-        String url = "http://" + "3.38.84.121" + "/llm";
+        String url = "http://" + FAST_SERVER_IP + "/llm";
         ResponseMessageDto llmResponse = http.postForObject(url, message, ResponseMessageDto.class);
         System.out.println("도착3"+"\n");
 

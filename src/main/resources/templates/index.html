@@ -5,7 +5,6 @@
   <title>Title</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" th:href="@{/css/vars.css}" href="../static/css/vars.css">
   <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
   <style>
    a,
@@ -101,50 +100,10 @@
         <div class="odh">Odh</div>
       </div>
     </div>
-    <button class="frame-80" id="tryNowBtn">
+    <button class="frame-80" id="tryNowBtn" th:onclick="|location.href='@{/chat-room}'|"
+      type = "button">
       <div class="try-now">Try now</div>
     </button>
-
-    <script th:inline="javascript">
-      document.getElementById('tryNowBtn').addEventListener('click', ()=>{
-        const storedToken = localStorage.getItem('accessToken');
-        if(!storedToken){
-          window.location.href = '/login';
-        // /login 으로 바뀜
-        } else {
-          fetch('/chat',{
-            method: 'GET',
-            headers: {
-              'Authorization': `Bearer `+ storedToken
-            }
-          }).then(response=>{
-            if(response.status === 404){
-              const refresh = localStorage.getItem('refreshToken');
-              fetch('/refresh', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json' // 바디를 JSON으로 보낼 경우
-                },
-                body: JSON.stringify({
-                  accessToken: storedToken,
-                  refreshToken: refresh
-                })
-              }).then(resp => resp.json())
-                      .then(data => {
-                        localStorage.setItem('accessToken', data.newAccessToken);
-                        localStorage.setItem('refreshToken', data.newRefreshToken);
-                        // 필요 시 재시도 또는 다른 동작
-                        window.location.href = '/chat';
-                      })
-            } else {
-              window.location.href = '/chat';
-            }
-          })
-        }
-
-      })
-    </script>
-
 
     <div class="group-12">
       <div class="ellipse-13"></div>
@@ -160,22 +119,22 @@
         <div class="sign-up">SIGN UP</div>
       </button>
     </div>
-    <img class="_5" src="../static/png/_50.png" />
-    <img class="group-71" src="../static/png/group-710.png" />
+    <img class="_5" src="../static/png/_50.png" th:src="@{/png/_50.png}"/>
+    <img class="group-71" src="../static/png/group-710.png" th:src="@{/png/group-710.png}"/>
     <button class="frame-83" data-name="value">
-      <img class="div" src="../static/png/div0.png" />
+      <img class="div" src="../static/png/div0.png" th:src="@{/png/div0.png}"/>
     </button>
     <button class="frame-84">
-      <img class="div2" src="../static/png/div1.png" />
+      <img class="div2" src="../static/png/div1.png" th:src="@{/png/div1.png}"/>
     </button>
     <button class="frame-85">
-      <img class="div3" src="../static/png/div2.png" />
+      <img class="div3" src="../static/png/div2.png" th:src="@{/png/div2.png}"/>
     </button>
     <button class="frame-86">
-      <img class="div4" src="../static/png/div3.png" />
+      <img class="div4" src="../static/png/div3.png" th:src="@{/png/div3.png}"/>
     </button>
     <button class="frame-87">
-      <img class="div5" src="../static/png/div4.png" />
+      <img class="div5" src="../static/png/div4.png" th:src="@{/png/div4.png}"/>
     </button>
   </div>
   

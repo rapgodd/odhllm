@@ -1,11 +1,9 @@
 package com.giyeon.odhllm.domain.dto;
 
-import lombok.Builder;
 import lombok.Data;
 
 
 @Data
-@Builder
 public class MessageDto {
 
     private String message;
@@ -13,10 +11,12 @@ public class MessageDto {
     private String topic;
     private Long chatRoomId;
 
-//    public MessageDto(String message, Long sender, String topic) {
-//        this.message = message;
-//        this.sender = sender;
-//        this.topic = topic;
-//    }
+    public MessageDto(String message, Long sender) {
+        this.message = message;
+        if(sender == null){
+            this.sender = 0L;
+        }
+    }
+
 
 }

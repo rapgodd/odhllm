@@ -21,10 +21,10 @@ public class LoginController {
         AuthTokenDto authTokenDto = loginService.authenticateUser(form);
 
         if(authTokenDto.isExistedUser()){
-            request.getSession().setAttribute("user", form.getEmail());
+            request.getSession().setAttribute("user", authTokenDto.getUserId());
         }
 
-        return "home";
+        return "index";
     }
 
     @GetMapping("/login")

@@ -18,11 +18,12 @@ public class SessionLoginService implements Login {
     @Override
     public AuthTokenDto authenticateUser(LoginRequestDto loginRequestDto) {
 
-        userRepository.findByEmail(loginRequestDto.getEmail())
+        User user = userRepository.findByEmail(loginRequestDto.getEmail())
                 .orElseThrow(() -> new WrongUserInformationException("잘못된 이메일 또는 비밀번호입니다."));
 
         AuthTokenDto response = new AuthTokenDto();
         response.setExistedUser(true);
+        response.setUserId(user.getId());
         return response;
 
     }

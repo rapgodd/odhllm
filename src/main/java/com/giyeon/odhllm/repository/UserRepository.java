@@ -27,9 +27,25 @@ public class UserRepository {
     }
 
     public Optional<User> findByEmail(String email) {
-        return em.createQuery("select u from User u where u.email = :email", User.class)
-                .setParameter("email", email)
-                .getResultList().stream().findAny();
+        try{
+            User user = em.createQuery("select u from User u where u.email = :email", User.class)
+                                .setParameter("email", email)
+                                .getSingleResult();
+            return Optional.of(user);
+        }
+        catch (Exception e) {
+            return Optional.empty();
+        }
     }
 
+    public Optional<User> findById(Long userId) {
+        try {
+            User user = em.createQuery("select u from User u where u.id= :userId", User.class)
+                            .setParameter("userId", userId)
+                            .getSingleResult();
+            return Optional.of(user);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
 }

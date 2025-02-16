@@ -8,12 +8,12 @@ public class HomeController {
 
     @GetMapping("/main")
     public String homepage(){
-        return "home";
+        return "index";
     }
 
     @GetMapping("/")
     public String matchDefaultUrl(){
-        return "home";
+        return "index";
     }
 
 }

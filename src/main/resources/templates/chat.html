@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../static/css/chatStyle.css" th:href="@{/css/chatStyle.css}">
+  
+  
+  <style>
+   a,
+   button,
+   input,
+   select,
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   * {
+       box-sizing: border-box;
+       margin: 0;
+       padding: 0;
+       border: none;
+       text-decoration: none;
+       background: none;
+   
+       -webkit-font-smoothing: antialiased;
+   }
+   
+   menu, ol, ul {
+       list-style-type: none;
+       margin: 0;
+       padding: 0;
+   }
+
+   button {
+     cursor: pointer;
+   }
+
+  </style>
+  <title>Document</title>
+</head>
+<body>
+  <div class="_1444">
+    <aside class="rectangle-158"></aside>
+    <div class="rectangle-106"></div>
+    <div class="rectangle-107"></div>
+    <div class="rectangle-53"></div>
+    <svg
+      class="union"
+      width="453"
+      height="865"
+      viewBox="0 0 453 865"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M402.956 0H90.0685L90.0686 524.347C79.3343 547.994 56.5387 552.228 39.8352 552.142C39.4034 552.127 38.9697 552.12 38.5343 552.12C38.4331 552.12 38.3321 552.12 38.2311 552.121L38.1764 552.12V552.122C17.3903 552.32 0.599365 569.817 0.599365 591.372C0.599365 612.927 17.3903 630.423 38.1764 630.622V630.624C73.6778 630.624 87.5634 649.633 90.0686 659.137L90.0685 864.284H402.956C430.57 864.284 452.956 841.899 452.956 814.284V50C452.956 22.3858 430.57 0 402.956 0Z"
+        fill="url(#paint0_linear_81_6178)"
+      />
+      <defs>
+        <linearGradient
+          id="paint0_linear_81_6178"
+          x1="101.878"
+          y1="864.284"
+          x2="468.532"
+          y2="387.843"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="#8B96EC" />
+          <stop offset="1" stop-color="#B7C0FF" />
+        </linearGradient>
+      </defs>
+    </svg>
+    <button class="frame-83" th:onclick="|location.href='@{/}'|" type="button">
+      <img class="div" src="../static/png/div0.png" th:src="@{/png/div0.png}"/>
+    </button>
+    <button class="frame-84" th:onclick="|location.href='@{/chat}'|" type="button">
+      <img class="div2" src="../static/png/div1.png" th:src="@{/png/div1.png}"/>
+    </button>
+    <button class="frame-85" th:onclick="|location.href='@{/notification}'|" type="button">
+      <img class="div3" src="../static/png/div2.png" th:src="@{/png/div2.png}"/>
+    </button>
+    <button class="frame-86" th:onclick="|location.href='@{/user/advice/give}'|" type="button">
+      <img class="div4" src="../static/png/div3.png" th:src="@{/png/div3.png}"/>
+    </button>
+    <button class="frame-87" th:onclick="|location.href='@{/user/advice/get}'|" type="button">
+      <img class="div5" src="../static/png/div4.png" th:src="@{/png/div4.png}"/>
+    </button>
+    <div class="rectangle-89"></div>
+
+    <div class="chat-message-container">
+      <div th:each="msg : ${messageList}">
+        <div th:if="${msg.sender} == 0" class="message-left">
+          <div th:text="${msg.message}" class="left"></div>
+        </div>
+        <div th:if="${msg.sender} != 0" class="message-right">
+          <div th:text="${msg.message}" class="right"></div>
+        </div>
+      </div>
+    </div>
+
+      <svg
+      class="group-47"
+      width="33"
+      height="29"
+      viewBox="0 0 33 29"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        cx="11.1905"
+        cy="11.6727"
+        r="9.64923"
+        stroke="#A3ADF6"
+        stroke-width="3"
+      />
+      <path
+        d="M19.0363 18.6931L32.2502 28.1906"
+        stroke="#A3ADF6"
+        stroke-width="3"
+        stroke-linecap="round"
+      />
+    </svg>
+    <svg
+      class="vector-66"
+      width="3"
+      height="27"
+      viewBox="0 0 3 27"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1.12329 1.18823L1.12329 25.5238"
+        stroke="#2F3566"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+    </svg>
+  <div class="button-container">
+    <div th:each="room : ${chatRoomList}">
+      <button class="frame-97"
+              th:onclick="|location.href='@{/chat-room(roomId=${room.chatRoomId})}'|">
+        <div class="gpt" th:text="${room.roomName}"></div>
+      </button>
+    </div>
+  </div>
+
+    <svg
+      class="vector-61"
+      width="288"
+      height="2"
+      viewBox="0 0 288 2"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M0 1.20898H287.375" stroke="white" />
+    </svg>
+    <svg
+      class="vector-62"
+      width="288"
+      height="2"
+      viewBox="0 0 288 2"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M0 1.16455H287.375" stroke="white" />
+    </svg>
+    <svg
+      class="vector-63"
+      width="288"
+      height="2"
+      viewBox="0 0 288 2"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M0 1.12012H287.375" stroke="white" />
+    </svg>
+    <svg
+      class="vector-64"
+      width="288"
+      height="2"
+      viewBox="0 0 288 2"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M0 1.07568H287.375" stroke="white" />
+    </svg>
+    <svg
+      class="vector-65"
+      width="288"
+      height="2"
+      viewBox="0 0 288 2"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M0 1.03125H287.375" stroke="white" />
+    </svg>
+    <div class="rectangle-88">
+
+    </div>
+    <button class="frame-103">
+      <div class="ellipse-54"></div>
+      <div class="group-50">
+        <div class="rectangle-100"></div>
+        <div class="rectangle-102"></div>
+        <div class="rectangle-103"></div>
+        <div class="rectangle-101"></div>
+      </div>
+    </button>
+    <button class="frame-102">
+      <svg
+        class="group-51"
+        width="15"
+        height="21"
+        viewBox="0 0 15 21"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect
+          x="3.2749"
+          y="0.735352"
+          width="8.63613"
+          height="12.5616"
+          rx="4.31807"
+          fill="#D9DEFF"
+        />
+        <path
+          d="M0.986917 9.37158C0.637461 11.4652 1.47616 15.6524 7.62659 15.6524C11.4707 15.6524 14.2663 14.0822 14.2663 9.70215"
+          stroke="#D9DEFF"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+        <path
+          d="M7.59302 15.6523V19.9704"
+          stroke="#D9DEFF"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+        <path
+          d="M3.2749 20.3628H11.911"
+          stroke="#D9DEFF"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+      </svg>
+    </button>
+    <button class="frame-104">
+      <div class="ellipse-56"></div>
+      <svg
+        class="group-52"
+        width="15"
+        height="15"
+        viewBox="0 0 15 15"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0.833923 7.54932L14.1807 7.54932"
+          stroke="white"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+        <path
+          d="M7.50726 0.875977L7.50726 14.2227"
+          stroke="white"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+      </svg>
+    </button>
+  </div>
+  
+</body>
+</html>

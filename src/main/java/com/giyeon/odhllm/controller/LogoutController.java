@@ -18,7 +18,7 @@ public class LogoutController {
     public String signUp(@RequestBody SignUpDto signUpDto, Model model){
         signUpService.save(signUpDto);
         model.addAttribute("message", "회원가입이 완료되었습니다.");
-        return "home";
+        return "index";
     }
 
 
