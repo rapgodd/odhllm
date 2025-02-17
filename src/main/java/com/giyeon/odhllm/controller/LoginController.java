@@ -24,12 +24,12 @@ public class LoginController {
             request.getSession().setAttribute("user", authTokenDto.getUserId());
         }
 
-        return "index";
+        return "responsiveIndex";
     }
 
     @GetMapping("/login")
     public String login(@ModelAttribute("loginForm") LoginRequestDto form){
-        return "login";
+        return "responsiveLogin";
     }
 
 }

@@ -1,0 +1,14 @@
+.nanum-gothic-regular {
+    font-family: "Nanum Gothic", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.login-id:focus::placeholder{
+    color: transparent;
+}
+
+.login-pw:focus::placeholder{
+    color: transparent;
+}
+

@@ -250,7 +250,15 @@
   cursor: pointer;
 }
 
-
+.send{
+  margin-top: 30px;
+}
+.chatInput{
+  width:75%;
+  height:34px;
+  margin-left:50px;
+  border-radius:5px;
+}
 .gpt {
   color: #ffffff;
   font-family: "Pretendard-Regular", sans-serif;

@@ -45,6 +45,7 @@ public class SimpleTcpService implements Tcp {
         System.out.println("도착7"+"\n");
         messageEmRepository.saveAll(List.of(userMessage, llmMessage));
         System.out.println("도착8"+"\n");
+
         return llmResponse;
     }
 

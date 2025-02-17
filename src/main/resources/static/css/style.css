@@ -138,6 +138,12 @@ hr.line-1 {
 .frame-80:hover {
   background-color: #a3a0dc;
 }
+.container{
+  width: 100%;
+  max-width: 2000px;
+  margin: 0 auto;
+  padding: 0 0px;
+}
 .try-now {
   color: #ffffff;
   text-align: left;

@@ -1,0 +1,27 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.btn-custom {
+    background: #6371db;
+    border-color: #6371db;
+    color: #fff;
+}
+
+.btn-custom:hover {
+    background-color: #a3a0dc;
+    border-color: #a3a0dc;
+    color: #fff;
+}
+
+.page-bg-gradient {
+    min-height: 100vh;
+    background: linear-gradient(
+            220.45deg,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(99, 113, 219, 1) 100%
+    );
+    background-size: cover;
+}

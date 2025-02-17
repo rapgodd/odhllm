@@ -20,8 +20,7 @@ public class RagApiController {
     public ResponseEntity<ResponseDto<?>> sendMessage(@RequestBody MessageDto messageDto) {
 
         ResponseMessageDto responseMessageDto = tcp.send(messageDto);
-
-        return null;
+        return ResponseDto.ok(responseMessageDto);
     }
 
 }
