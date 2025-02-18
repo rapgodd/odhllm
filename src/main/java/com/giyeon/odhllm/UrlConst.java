@@ -3,13 +3,13 @@ package com.giyeon.odhllm;
 public class UrlConst {
 
     public static final String[] PERMIT_URLS = {
-            "/signUp",
+            "/signUp/**",
             "/login",
             "/images/**",
             "/favicon.ico",
             "/refresh",
             "/main",
-            "/mail/code",
+            "/mail/**",
             "/user/email/**",
             "/email/**",
             "/css/**",
@@ -17,6 +17,7 @@ public class UrlConst {
             "/",
             "/png/**",
             "/message/**",
+            "/nickname",
     };
 
 

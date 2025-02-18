@@ -23,6 +23,25 @@ public class ResponseDto<T> {
                         .build());
     }
 
+    public static <T> ResponseEntity<ResponseDto<?>> duplicatedInput(T data) {
+        return ResponseEntity
+                .badRequest()
+                .body(ResponseDto
+                        .<T>builder()
+                        .code(HttpStatus.BAD_REQUEST.value())
+                        .data(data)
+                        .build());
+    }
+
+    public static <T> ResponseEntity<ResponseDto<?>> failedApiCall(T data) {
+        return ResponseEntity
+                .internalServerError()
+                .body(ResponseDto
+                        .<T>builder()
+                        .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                        .data(data)
+                        .build());
+    }
 
 
 }

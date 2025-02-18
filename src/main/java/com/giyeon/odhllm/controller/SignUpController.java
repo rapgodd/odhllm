@@ -4,7 +4,6 @@ import com.giyeon.odhllm.domain.dto.SignUpDto;
 import com.giyeon.odhllm.service.SignUpService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -14,16 +13,15 @@ public class SignUpController {
     private final SignUpService signUpService;
 
     @PostMapping("/signUp")
-    public String signUp(@RequestBody SignUpDto signUpDto, Model model){
+    public String signUp(@ModelAttribute SignUpDto signUpDto){
         signUpService.save(signUpDto);
-        model.addAttribute("message", "회원가입이 완료되었습니다.");
-        return "index";
+        return "redirect:/login";
     }
 
     @GetMapping("/signUp")
-    public String goSignUpPage(){
-        return "signup";
-    }
+    public String goSignUpPage(@ModelAttribute("signup") SignUpDto signUpDto){
 
+        return "responsiveSignup";
+    }
 
 }

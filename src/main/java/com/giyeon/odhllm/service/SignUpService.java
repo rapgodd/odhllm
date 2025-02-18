@@ -1,6 +1,8 @@
 package com.giyeon.odhllm.service;
 
+import com.giyeon.odhllm.domain.User;
 import com.giyeon.odhllm.domain.dto.CodeDto;
+import com.giyeon.odhllm.domain.dto.ResponseDto;
 import com.giyeon.odhllm.domain.dto.SignUpDto;
 import com.giyeon.odhllm.domain.dto.ValidationDto;
 import com.giyeon.odhllm.repository.Interface.Creation;
@@ -8,6 +10,7 @@ import com.giyeon.odhllm.repository.UserRepository;
 import com.giyeon.odhllm.service.template.AccountCreationTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
@@ -60,5 +63,15 @@ public class SignUpService {
                 return ValidationDto.builder().valid(false).responseData("인증 실패").build();
             }
         }
+    }
+
+    public ResponseEntity<ResponseDto<?>> validateNickname(String nickname) {
+
+         if(userRepository.findByNickname(nickname).isPresent()){
+             return ResponseDto.duplicatedInput("이미 존재하는 닉네임입니다");
+         }else{
+             return ResponseDto.ok("사용 가능한 닉네임입니다.");
+         }
+
     }
 }

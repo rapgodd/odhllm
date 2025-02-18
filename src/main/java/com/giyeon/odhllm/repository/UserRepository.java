@@ -48,4 +48,15 @@ public class UserRepository {
             return Optional.empty();
         }
     }
+
+    public Optional<User> findByNickname(String nickname) {
+        try{
+            User user = em.createQuery("select u from User u where u.nickName = :nickName", User.class)
+                        .setParameter("nickName", nickname)
+                        .getSingleResult();
+            return Optional.of(user);
+        }catch (Exception e){
+            return Optional.empty();
+        }
+    }
 }
