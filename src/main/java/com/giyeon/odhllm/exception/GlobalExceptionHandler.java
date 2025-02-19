@@ -17,14 +17,14 @@ public class GlobalExceptionHandler {
     public String emptyUserInformException(EmptyUserInformException e, Model model){
         model.addAttribute("status", 404);
         model.addAttribute("message", e.getMessage());
-        return "home";
+        return "responsiveIndex";
     }
 
     @ExceptionHandler(WrongUserInformationException.class)
     public String wrongUserInformException(WrongUserInformationException e, Model model){
         model.addAttribute("status", 404);
         model.addAttribute("message", e.getMessage());
-        return "login";
+        return "responsiveLogin";
     }
 
     @ExceptionHandler(MailException.class)
@@ -36,7 +36,7 @@ public class GlobalExceptionHandler {
     public String handleRuntimeException(RuntimeException e, Model model) {
         model.addAttribute("status", 404);
         model.addAttribute("message", e.getMessage());
-        return "home";
+        return "responsiveIndex";
     }
 
 }

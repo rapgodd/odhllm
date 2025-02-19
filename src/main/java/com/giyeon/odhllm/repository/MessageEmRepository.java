@@ -26,15 +26,5 @@ public class MessageEmRepository implements Message {
     }
 
 
-    public List<ChatRoom> findAllRoomsByUser(User user) {
-        return em.createQuery("select c from ChatRoom c where c.user = :user", ChatRoom.class)
-                    .setParameter("user", user)
-                    .getResultList();
-    }
 
-    public List<Chat> getMessagesByRoomId(Long roomId) {
-        return em.createQuery("select c from Chat c where c.chatRoomId = :roomId", Chat.class)
-                    .setParameter("roomId", roomId)
-                    .getResultList();
-    }
 }

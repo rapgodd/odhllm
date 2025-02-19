@@ -1,10 +1,8 @@
 package com.giyeon.odhllm.domain;
 
+import com.giyeon.odhllm.domain.dto.NewRoomDto;
 import jakarta.persistence.*;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 @Entity
 @Getter
@@ -20,6 +18,13 @@ public class ChatRoom {
 
     private String title;
 
-    private LocalDateTime createdDate;
+    @Enumerated(EnumType.STRING)
+    private Topic topic;
+
+    public void fillEmptyRoom(User user, NewRoomDto newRoomDto){
+        this.user = user;
+        this.title = newRoomDto.getTitle();
+        this.topic = newRoomDto.getTopic();
+    }
 
 }

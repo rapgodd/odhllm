@@ -5,10 +5,15 @@ import com.giyeon.odhllm.domain.ChatRoom;
 import com.giyeon.odhllm.domain.User;
 import com.giyeon.odhllm.domain.dto.ChatRoomDto;
 import com.giyeon.odhllm.domain.dto.MessageDto;
+import com.giyeon.odhllm.domain.dto.NewRoomDto;
 import com.giyeon.odhllm.domain.dto.RoomDto;
+import com.giyeon.odhllm.exception.custom.WrongUserInformationException;
+import com.giyeon.odhllm.repository.ChatRoomRepository;
 import com.giyeon.odhllm.repository.MessageEmRepository;
 import com.giyeon.odhllm.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +25,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ChatService {
 
-    private final MessageEmRepository chatRepository;
     private final UserRepository userRepository;
+    private final ChatRoomRepository chatRoomRepository;
 
 
     @Transactional(readOnly = true)
@@ -29,7 +34,7 @@ public class ChatService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다."));
 
-        List<ChatRoom> userRooms = chatRepository.findAllRoomsByUser(user);
+        List<ChatRoom> userRooms = chatRoomRepository.findAllRoomsByUser(user);
         ChatRoomDto chatRoomDto = new ChatRoomDto(new ArrayList<>(), new ArrayList<>());
 
         if(roomId==null){
@@ -43,7 +48,7 @@ public class ChatService {
                 chatRoomDto.getRoomList().add(new RoomDto(chatRoom.getTitle(), chatRoom.getId()));
             });
 
-            List<Chat> messages = chatRepository.getMessagesByRoomId(roomId);
+            List<Chat> messages = chatRoomRepository.getMessagesByRoomId(roomId);
             messages.forEach(message -> {
                 chatRoomDto.getMessageList().add(new MessageDto(message.getMessage(), message.getSender()));
             });
@@ -52,4 +57,15 @@ public class ChatService {
         }
     }
 
+    @Transactional
+    public void createRoom(NewRoomDto newRoom, Long userId) {
+        //유저 객체 가져오기
+          User user = userRepository.findById(userId)
+                      .orElseThrow(() ->
+                      new WrongUserInformationException("세션이 만료되었거나 존재하지 않습니다. 다시 로그인해 주세요."));
+
+          ChatRoom room = new ChatRoom();
+          room.fillEmptyRoom(user, newRoom);
+          chatRoomRepository.saveRoom(room);
+    }
 }
