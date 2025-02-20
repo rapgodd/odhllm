@@ -691,7 +691,7 @@
 
             <!-- Mobile: close -->
             <div class="col-2 d-xl-none">
-<!--              <a class="icon icon-lg text-muted" href="#" data-toggle-chat="">-->
+              <a class="icon icon-lg text-muted" href="#" data-toggle-chat="">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg>
               </a>
             </div>
@@ -717,7 +717,6 @@
 
         <!-- Chat: Content -->
         <div class="chat-body hide-scrollbar flex-1 h-100">
-<!--            채팅 생성 이후 스크롤 하면 아래 끝의 메세지가 잘리는 문제 해결 어떻게? p-4 p-lg-6 이렇게 해도 안됨 data-simplebar이거 말고-->
           <div id="messageContainer" class="chat-body-inner">
               <div class="py-6 py-lg-12" th:each="msg : ${messageList}">
 
@@ -727,7 +726,7 @@
                     <div class="message-body">
                       <div class="message-content">
                         <div class="message-text">
-                          <p th:text="${msg.message}"></p>
+                          <p th:utext="${msg.message}"></p>
                         </div>
                       </div>
                     </div>
@@ -746,7 +745,7 @@
                     <div class="message-body">
                       <div class="message-content">
                         <div class="message-text">
-                          <p th:text="${msg.message}"></p>
+                          <p th:utext="${msg.message}"></p>
                         </div>
                       </div>
                     </div>
@@ -1844,88 +1843,12 @@
     </div>
   </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('chatForm');
-            const messageInput = document.getElementById('chatMessageInput');
-            const messageContainer = document.getElementById('messageContainer');
-            const roomIdElement = document.getElementById('chatRoomId');
 
-            form.addEventListener('submit', (event) => {
-                event.preventDefault();
-
-                const messageText = messageInput.value.trim();
-                if (!messageText) return;
-
-                const chatRoomId = roomIdElement.value;
-
-                const tempMessage = document.createElement('div');
-                tempMessage.classList.add('message', 'message-out');
-                tempMessage.innerHTML = `
-        <div class="message-inner">
-          <div class="message-body">
-            <div class="message-content">
-              <div class="message-text">
-                <p>...메시지 전송중...</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-                messageContainer.appendChild(tempMessage);
-
-                fetch("/message/v1", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        message: messageText,
-                        chatRoomId: chatRoomId
-                    })
-                })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Server Error');
-                        }
-                        return response.json();
-                    })
-                    .then(json => {
-
-                        const reply = json.data.message;
-                        tempMessage.innerHTML = `
-          <div class="message-inner">
-            <div class="message-body">
-              <div class="message-content">
-                <div class="message-text">
-                  <p>${reply}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-                    })
-                    .catch(err => {
-                        tempMessage.innerHTML = `
-          <div class="message-inner">
-            <div class="message-body">
-              <div class="message-content">
-                <div class="message-text">
-                  <p style="color:red;">전송 오류: ${err.message}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-                    })
-                    .finally(() => {
-                        messageInput.value = "";
-                    });
-            });
-        });
-    </script>
 
 </div>
 
 <script src="../static/js/vendor.js" th:src="@{/js/vendor.js}"></script>
 <script src="../static/js/template.js" th:src="@{/js/template.js}"></script>
+<script src="../static/js/chat.js" th:src="@{/js/chat.js}"></script>
 </body>
 </html>

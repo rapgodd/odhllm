@@ -50,7 +50,7 @@ public class ChatService {
 
             List<Chat> messages = chatRoomRepository.getMessagesByRoomId(roomId);
             messages.forEach(message -> {
-                chatRoomDto.getMessageList().add(new MessageDto(message.getMessage(), message.getSender()));
+                chatRoomDto.getMessageList().add(new MessageDto(message.makeMoreReadable().getMessage(), message.getSender()));
             });
 
             return chatRoomDto;

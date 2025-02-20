@@ -1,5 +1,8 @@
 package com.giyeon.odhllm.domain;
 
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.ast.Node;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,6 +36,14 @@ public class Chat {
         chat.sender = sender;
         chat.message = message;
         return chat;
+    }
+
+    public Chat makeMoreReadable() {
+        Parser parser = Parser.builder().build();
+        Node document = parser.parse(this.message);
+        HtmlRenderer renderer = HtmlRenderer.builder().build();
+        this.message = renderer.render(document);
+        return this;
     }
 
 

@@ -34,6 +34,7 @@ public class SimpleTcpService implements Tcp {
         ResponseMessageDto llmResponse = http.postForObject(url, message, ResponseMessageDto.class);
         System.out.println("도착3"+"\n");
 
+
         //chat 엔티티 생성
         System.out.println("도착4"+"\n");
         Chat userMessage = new Chat().createChat(message.getChatRoomId(), message.getSender(), message.getMessage());
@@ -41,11 +42,13 @@ public class SimpleTcpService implements Tcp {
         Chat llmMessage = new Chat().createChat(message.getChatRoomId(), null, llmResponse.getMessage());
         System.out.println("도착6"+"\n");
 
+
         //메세지 저장 DB에
         System.out.println("도착7"+"\n");
         messageEmRepository.saveAll(List.of(userMessage, llmMessage));
         System.out.println("도착8"+"\n");
 
+        llmResponse.makeMoreReadable();
         return llmResponse;
     }
 

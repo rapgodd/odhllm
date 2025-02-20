@@ -48,6 +48,10 @@ dependencies {
     //mail
     implementation 'org.springframework.boot:spring-boot-starter-mail'
 
+    //MarkDown처리
+    implementation 'com.vladsch.flexmark:flexmark-all:0.64.8'
+
+
 
 }
 
