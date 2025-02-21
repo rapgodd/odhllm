@@ -46,6 +46,9 @@ public class User {
 
     }
 
+
+
+
     /**
      * ==Deprecated==
      * 세션인증으로 구조 변경으로 인해
@@ -69,6 +72,8 @@ public class User {
     }
 
 
-
-
+    public User makeRelation(Long sender) {
+        this.id = sender;
+        return this;
+    }
 }

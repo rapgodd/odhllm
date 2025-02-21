@@ -1,5 +1,6 @@
 package com.giyeon.odhllm.domain.dto;
 
+import com.giyeon.odhllm.domain.User;
 import lombok.Data;
 
 
@@ -15,6 +16,8 @@ public class MessageDto {
         this.message = message;
         if(sender == null){
             this.sender = 0L;
+        }else {
+            this.sender = sender;
         }
     }
 

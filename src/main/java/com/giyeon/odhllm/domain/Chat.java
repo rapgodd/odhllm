@@ -24,13 +24,15 @@ public class Chat {
     private Long chatRoomId;
 
     @Nullable
-    private Long sender;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sender_id")
+    private User sender;
 
     @Lob
     private String message;
 
 
-    public Chat createChat(Long chatRoomId, Long sender, String message){
+    public Chat createChat(Long chatRoomId, User sender, String message){
         Chat chat = new Chat();
         chat.chatRoomId = chatRoomId;
         chat.sender = sender;
@@ -45,6 +47,7 @@ public class Chat {
         this.message = renderer.render(document);
         return this;
     }
+
 
 
 }

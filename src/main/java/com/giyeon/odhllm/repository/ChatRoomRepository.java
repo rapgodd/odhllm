@@ -22,7 +22,7 @@ public class ChatRoomRepository {
     }
 
     public List<Chat> getMessagesByRoomId(Long roomId) {
-        return em.createQuery("select c from Chat c where c.chatRoomId = :roomId", Chat.class)
+        return em.createQuery("select c from Chat c left join fetch c.sender where c.chatRoomId = :roomId", Chat.class)
                 .setParameter("roomId", roomId)
                 .getResultList();
     }

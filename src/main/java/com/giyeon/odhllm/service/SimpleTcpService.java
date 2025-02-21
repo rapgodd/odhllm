@@ -2,6 +2,7 @@ package com.giyeon.odhllm.service;
 
 import com.giyeon.odhllm.controller.Tcp;
 import com.giyeon.odhllm.domain.Chat;
+import com.giyeon.odhllm.domain.User;
 import com.giyeon.odhllm.domain.dto.MessageDto;
 import com.giyeon.odhllm.domain.dto.ResponseMessageDto;
 import com.giyeon.odhllm.repository.MessageEmRepository;
@@ -37,7 +38,8 @@ public class SimpleTcpService implements Tcp {
 
         //chat 엔티티 생성
         System.out.println("도착4"+"\n");
-        Chat userMessage = new Chat().createChat(message.getChatRoomId(), message.getSender(), message.getMessage());
+        User relationObj = new User();
+        Chat userMessage = new Chat().createChat(message.getChatRoomId(), relationObj.makeRelation(message.getSender()), message.getMessage());
         System.out.println("도착5"+"\n");
         Chat llmMessage = new Chat().createChat(message.getChatRoomId(), null, llmResponse.getMessage());
         System.out.println("도착6"+"\n");

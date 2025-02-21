@@ -9,11 +9,8 @@ import com.giyeon.odhllm.domain.dto.NewRoomDto;
 import com.giyeon.odhllm.domain.dto.RoomDto;
 import com.giyeon.odhllm.exception.custom.WrongUserInformationException;
 import com.giyeon.odhllm.repository.ChatRoomRepository;
-import com.giyeon.odhllm.repository.MessageEmRepository;
 import com.giyeon.odhllm.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,7 +47,8 @@ public class ChatService {
 
             List<Chat> messages = chatRoomRepository.getMessagesByRoomId(roomId);
             messages.forEach(message -> {
-                chatRoomDto.getMessageList().add(new MessageDto(message.makeMoreReadable().getMessage(), message.getSender()));
+                chatRoomDto.getMessageList().add(new MessageDto(message.makeMoreReadable().getMessage(),
+                        message.getSender()==null?null:message.getSender().getId()));
             });
 
             return chatRoomDto;
