@@ -31,4 +31,8 @@ public class ChatRoomRepository {
         em.persist(chatRoom);
     }
 
+    public ChatRoom findRoomById(Long roomId){
+        return em.find(ChatRoom.class, roomId);
+    }
+
 }

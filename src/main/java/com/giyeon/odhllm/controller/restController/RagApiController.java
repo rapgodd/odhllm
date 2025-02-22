@@ -21,7 +21,6 @@ public class RagApiController {
     public ResponseEntity<ResponseDto<?>> sendMessage(@RequestBody MessageDto messageDto, HttpServletRequest request) {
         Long userId = (Long)request.getSession().getAttribute("user");
         messageDto.setSender(userId);
-        messageDto.setTopic("Spring");
         ResponseMessageDto responseMessageDto = tcp.send(messageDto);
         return ResponseDto.ok(responseMessageDto);
     }

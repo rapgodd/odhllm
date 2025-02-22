@@ -2,9 +2,11 @@ package com.giyeon.odhllm.service;
 
 import com.giyeon.odhllm.controller.Tcp;
 import com.giyeon.odhllm.domain.Chat;
+import com.giyeon.odhllm.domain.ChatRoom;
 import com.giyeon.odhllm.domain.User;
 import com.giyeon.odhllm.domain.dto.MessageDto;
 import com.giyeon.odhllm.domain.dto.ResponseMessageDto;
+import com.giyeon.odhllm.repository.ChatRoomRepository;
 import com.giyeon.odhllm.repository.MessageEmRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,10 +24,17 @@ public class SimpleTcpService implements Tcp {
     @Value("${fast-server.ip}")
     private String FAST_SERVER_IP;
     private final MessageEmRepository messageEmRepository;
+    private final ChatRoomRepository chatRoomRepository;
 
     @Override
     @Transactional
     public ResponseMessageDto send(MessageDto message) {
+
+        //방의 Topic Dto에 넣기
+        ChatRoom roomById = chatRoomRepository.findRoomById(message.getChatRoomId());
+        String topic = String.valueOf(roomById.getTopic());
+        message.setTopic(topic);
+        System.out.println("방의 토픽 :"+ topic +"\n");
 
         //API 요청
         System.out.println("도착1"+"\n");
