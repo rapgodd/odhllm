@@ -4,6 +4,7 @@ import com.giyeon.odhllm.domain.dto.SignUpDto;
 import com.giyeon.odhllm.exception.custom.EmptyUserInformException;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Getter
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -28,6 +30,10 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role userRole;
+
+    public User(Long sender) {
+        this.id = sender;
+    }
 
     public void hashPassword(PasswordEncoder passwordEncoder){
         this.password = passwordEncoder.encode(this.getPassword());

@@ -48,6 +48,13 @@ public class Chat {
         return this;
     }
 
+    public static Chat of(Long chatRoomId, User user, String message) {
+        Chat chat = new Chat();
+        chat.chatRoomId = chatRoomId;
+        chat.sender = user;
+        chat.message = message;
+        return chat;
+    }
 
 
 }

@@ -9,6 +9,7 @@ import com.giyeon.odhllm.domain.dto.ResponseMessageDto;
 import com.giyeon.odhllm.repository.ChatRoomRepository;
 import com.giyeon.odhllm.repository.MessageEmRepository;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,37 +31,28 @@ public class SimpleTcpService implements Tcp {
     @Transactional
     public ResponseMessageDto send(MessageDto message) {
 
-        //방의 Topic Dto에 넣기
-        ChatRoom roomById = chatRoomRepository.findRoomById(message.getChatRoomId());
-        String topic = String.valueOf(roomById.getTopic());
-        message.setTopic(topic);
-        System.out.println("방의 토픽 :"+ topic +"\n");
+        setTagIn(message);
+        ResponseMessageDto llmResponse = getAiAnswer(message);
 
-        //API 요청
-        System.out.println("도착1"+"\n");
-        RestTemplate http = new RestTemplate();
-        System.out.println("도착2"+"\n");
-        String url = "http://" + FAST_SERVER_IP + "/llm";
-        ResponseMessageDto llmResponse = http.postForObject(url, message, ResponseMessageDto.class);
-        System.out.println("도착3"+"\n");
-
-
-        //chat 엔티티 생성
-        System.out.println("도착4"+"\n");
-        User relationObj = new User();
-        Chat userMessage = new Chat().createChat(message.getChatRoomId(), relationObj.makeRelation(message.getSender()), message.getMessage());
-        System.out.println("도착5"+"\n");
-        Chat llmMessage = new Chat().createChat(message.getChatRoomId(), null, llmResponse.getMessage());
-        System.out.println("도착6"+"\n");
-
-
-        //메세지 저장 DB에
-        System.out.println("도착7"+"\n");
+        //chat 엔티티 생성 , 저장
+        Chat userMessage = Chat.of(message.getChatRoomId(), new User(message.getSender()), message.getMessage());
+        Chat llmMessage = Chat.of(message.getChatRoomId(), null, llmResponse.getMessage());
         messageEmRepository.saveAll(List.of(userMessage, llmMessage));
-        System.out.println("도착8"+"\n");
 
         llmResponse.makeMoreReadable();
         return llmResponse;
+    }
+
+    private ResponseMessageDto getAiAnswer(MessageDto message) {
+        RestTemplate http = new RestTemplate();
+        String url = "http://" + FAST_SERVER_IP + "/llm";
+        return http.postForObject(url, message, ResponseMessageDto.class);
+    }
+
+    private void setTagIn(MessageDto message) {
+        ChatRoom roomById = chatRoomRepository.findRoomById(message.getChatRoomId());
+        String topic = String.valueOf(roomById.getTopic());
+        message.setTopic(topic);
     }
 
 }
