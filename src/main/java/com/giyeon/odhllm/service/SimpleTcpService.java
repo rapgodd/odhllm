@@ -9,7 +9,6 @@ import com.giyeon.odhllm.domain.dto.ResponseMessageDto;
 import com.giyeon.odhllm.repository.ChatRoomRepository;
 import com.giyeon.odhllm.repository.MessageEmRepository;
 import lombok.RequiredArgsConstructor;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
